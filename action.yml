@@ -1,0 +1,77 @@
+name: Helm-actions
+description: A GitHub Action for Helm, the package manager for Kubernetes.
+author: Vidhya Shanker Goel
+
+branding:
+  icon: "package"
+  color: "blue"
+
+inputs:
+  chart_dir:
+    description: "Path to the Helm chart directory (containing Chart.yaml and values.yaml)."
+    required: false
+    default: "charts"
+
+  oci_registry:
+    description: "OCI registry host (e.g. ghcr.io) - hostname only or full host."
+    required: true
+
+  oci_repository:
+    description: "OCI repository (e.g. my-org/my-helm-charts)."
+    required: true
+
+  version_prefix:
+    description: "Semantic version prefix (e.g. 0.1.0). Final version will be '<version_prefix>-<runid>-<shortsha>'."
+    required: false
+    default: "0.1.0"
+
+  push_chart:
+    description: "Whether to push the packaged chart to the OCI registry (true/false)."
+    required: false
+    default: "true"
+
+  update_repo:
+    description: "Whether to commit HELMCHART-VERSION back to the repository (true/false)."
+    required: false
+    default: "true"
+
+  target_branch:
+    description: "Target branch to push HELMCHART-VERSION to. Default: current branch."
+    required: false
+    default: ""
+
+  package_output_dir:
+    description: "Directory to put the packaged chart (relative to repo)."
+    required: false
+    default: "./"
+
+  auth_token:
+    description: "Token used to login to GHCR / push to repo. Defaults to ${{ secrets.GITHUB_TOKEN }} when not provided."
+    required: false
+    default: ""
+
+
+outputs:
+  chart_version:
+    description: "Final chart version generated (e.g. 0.1.0-1234-abcd123)"
+
+  image_tag:
+    description: "Generated image tag portion (e.g. <runid>-<shortsha>)"
+
+  package_file:
+    description: "Packaged chart filename (e.g. mychart-0.1.0-1234-abcd123.tgz)"
+
+
+runs:
+  using: "docker"
+  image: "docker://ghcr.io/vidhya101/helm-action:latest"
+  args:
+  - ${{ inputs.chart_dir }}
+  - ${{ inputs.oci_registry }}
+  - ${{ inputs.oci_repository }}
+  - ${{ inputs.version_prefix }}
+  - ${{ inputs.push_chart }}
+  - ${{ inputs.update_repo }}
+  - ${{ inputs.target_branch }}
+  - ${{ inputs.package_output_dir }}
+  - ${{ inputs.auth_token }}
