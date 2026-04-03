@@ -25,7 +25,7 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build and Push Base Image
+      - name: Build and Push Base Image # build and push the base image to GitHub Container Registry
         run: |
           docker build -t ghcr.io/${{ github.repository_owner }}/helm-base:latest ./base-image
           docker push ghcr.io/${{ github.repository_owner }}/helm-base:latest
