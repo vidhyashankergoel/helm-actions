@@ -1,4 +1,4 @@
-# helm-actions
+# helm-actions-vidhya101
 
 GitHub Action for Helm Tasks
 
