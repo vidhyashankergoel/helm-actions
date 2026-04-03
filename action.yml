@@ -46,7 +46,7 @@ inputs:
     default: "./"
 
   auth_token:
-    description: "Token used to login to GHCR / push to repo. Defaults to ${{ secrets.GITHUB_TOKEN }} when not provided."
+    description: "Token used to login to GHCR / push to repo. If not provided, the action will use GITHUB_TOKEN automatically."
     required: false
     default: ""
 
