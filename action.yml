@@ -46,10 +46,9 @@ inputs:
     default: "./"
 
   auth_token:
-    description: "Token used to login to GHCR / push to repo. If not provided, the action will use GITHUB_TOKEN automatically."
+    description: "Token used to login to GHCR / push to repo."
     required: false
     default: ""
-
 
 outputs:
   chart_version:
@@ -61,17 +60,16 @@ outputs:
   package_file:
     description: "Packaged chart filename (e.g. mychart-0.1.0-1234-abcd123.tgz)"
 
-
 runs:
   using: "docker"
   image: "docker://ghcr.io/vidhya101/helm-action:latest"
   args:
-  - ${{ inputs.chart_dir }}
-  - ${{ inputs.oci_registry }}
-  - ${{ inputs.oci_repository }}
-  - ${{ inputs.version_prefix }}
-  - ${{ inputs.push_chart }}
-  - ${{ inputs.update_repo }}
-  - ${{ inputs.target_branch }}
-  - ${{ inputs.package_output_dir }}
-  - ${{ inputs.auth_token }}
+    - ${{ inputs.chart_dir }}
+    - ${{ inputs.oci_registry }}
+    - ${{ inputs.oci_repository }}
+    - ${{ inputs.version_prefix }}
+    - ${{ inputs.push_chart }}
+    - ${{ inputs.update_repo }}
+    - ${{ inputs.target_branch }}
+    - ${{ inputs.package_output_dir }}
+    - ${{ inputs.auth_token }}
