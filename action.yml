@@ -62,7 +62,7 @@ outputs:
 
 runs:
   using: "docker"
-  image: "docker://ghcr.io/vidhya101/helm-action:latest"
+  image: "ghcr.io/vidhyashankergoel/helm-action:latest"
   args:
     - ${{ inputs.chart_dir }}
     - ${{ inputs.oci_registry }}
